@@ -26,5 +26,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  # 최초 저장될 때 일시를 자동 저장해주는 옵션
     updated_at = models.DateTimeField(auto_now=True)  # 갱신될때마다 일시 저장해주는 옵션
 
+    class Meta:
+        ordering = ['-id']
+
     def __str__(self):
         return self.title
