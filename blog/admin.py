@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Post, Comments
+from .models import Post, Comments, Tag
 
 
 # 등록법 1
@@ -43,3 +43,8 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Comments)
 class CommentAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    list_display = ['name']
