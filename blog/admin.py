@@ -24,7 +24,6 @@ class PostAdmin(admin.ModelAdmin):
         return mark_safe('<strong>{}</strong>글자'.format(len(post.content)))
 
     content_size.short_description = '글자수'
-
     # content_size.allow_tags = True  # Deprecated
 
     def make_published(self, request, queryset):
@@ -38,6 +37,8 @@ class PostAdmin(admin.ModelAdmin):
         self.message_user(request, '{}건의 포스팅을 Draft 상태로 변경'.format(updated_count))  # django message framework 활용
 
     make_draft.short_description = '지정 포스팅을 Draft 상태로 변경합니다.'
+
+
 
 
 @admin.register(Comments)
