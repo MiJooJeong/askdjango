@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from django.contrib.messages import constants
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -130,3 +132,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+MESSAGE_LEVEL = constants.DEBUG     # 지금부터 debug 레벨의 messages를 남길 수 있음.
+MESSAGE_TAGS = {constants.ERROR: 'danger'}

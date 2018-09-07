@@ -39,8 +39,6 @@ class PostAdmin(admin.ModelAdmin):
     make_draft.short_description = '지정 포스팅을 Draft 상태로 변경합니다.'
 
 
-
-
 @admin.register(Comments)
 class CommentAdmin(admin.ModelAdmin):
     pass
