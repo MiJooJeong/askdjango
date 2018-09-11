@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import json
 
 from django.contrib.messages import constants
 
@@ -22,7 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4-=t6o$cgylq213d==sgey(je6c*n%c8mj*-06t0(6dhtslwos'
+secret_file = os.path.join(BASE_DIR, 'keys.json')
+
+with open(secret_file) as f:
+    secrets = json.loads(f.read())
+
+SECRET_KEY = secrets['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -144,3 +150,5 @@ INTERNAL_IPS = ['127.0.0.1']
 
 MESSAGE_LEVEL = constants.DEBUG     # 지금부터 debug 레벨의 messages를 남길 수 있음.
 MESSAGE_TAGS = {constants.ERROR: 'danger'}
+
+NAVER_CLIENT_ID = secrets['NAVER_CLIENT_ID']
