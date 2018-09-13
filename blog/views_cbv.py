@@ -1,9 +1,14 @@
 from django import forms
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView
+from django.views.generic import DetailView
+from django.views.generic import ListView
+
 from .models import Post
 
-
 post_list = ListView.as_view(model=Post, paginate_by=10)
+
+
+post_detail = DetailView.as_view(model=Post)
 
 
 # blog/forms.py
