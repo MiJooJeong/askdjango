@@ -1,16 +1,36 @@
 import os
+
 from django.conf import settings
-from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
+
 from .forms import PostForm
 from .models import Post
 
+# # STEP 1. FBV 버전
+# def post_detail(request, id):
+#     post = get_object_or_404(Post, id=id)
+#     return render(request, 'dojo/post_detail.html', {
+#         'post': post,
+#     })
 
-def post_detail(request, id):
-    post = get_object_or_404(Post, id=id)
-    return render(request, 'dojo/post_detail.html', {
-        'post': post,
-    })
+
+# STEP 2. 함수를 통해 view 생성 버전
+def generate_view_fn(model):
+    def view_fn(request, id):
+        instance = get_object_or_404(model, id=id)
+        instance_name = model._meta.model_name
+        template_name = '{}/{}_detail.html'.format(model._meta.app_label, instance_name)
+        return render(request, template_name, {
+            instance_name: instance,
+        })
+    return view_fn
+
+
+post_detail = generate_view_fn(Post)
 
 
 def post_new(request):
