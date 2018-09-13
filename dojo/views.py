@@ -66,7 +66,7 @@ from .models import Post
 
 
 # STEP 4. django 기본 제공 DetailView CBV 쓰기
-post_detail = DetailView.as_view(model=Post, pk_url_kwarg='id')
+post_detail = DetailView.as_view(model=Post)
 
 
 def post_new(request):
