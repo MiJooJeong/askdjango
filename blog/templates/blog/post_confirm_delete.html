@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>{{ post }} 삭제 확인</h1>
+
+    정말 삭제하시겠습니까?
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <a href="{{ post.get_absolute_url }}">아니요. 취소!</a>
+        <input type="submit" value="네, 삭제하겠습니다." />
+    </form>
+</body>
+</html>
