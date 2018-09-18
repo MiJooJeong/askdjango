@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
 import json
+import os
 
 from django.contrib.messages import constants
 
@@ -48,11 +48,11 @@ INSTALLED_APPS = [
     'bootstrap3',
     'debug_toolbar',
     'django_extensions',
+    'imagekit',
     'accounts',
     'blog',
     'dojo',
     'shop',
-    'imagekit',
 ]
 
 MIDDLEWARE = [
