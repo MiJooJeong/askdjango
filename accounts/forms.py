@@ -6,8 +6,8 @@ from accounts.models import Profile
 
 
 class SignupForm(UserCreationForm):
-    phone_number = forms.Charfield()
-    address = forms.Charfield()
+    phone_number = forms.CharField()
+    address = forms.CharField()
 
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ('email',)
