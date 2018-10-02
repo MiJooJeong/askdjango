@@ -70,7 +70,7 @@ def post_edit(request, id):
 
 
 def comment_list(request):
-    comment_list = Comments.objects.all()
+    comment_list = Comments.objects.all().select_related('post')
     return render(request, 'blog/comment_list.html', {
         'comment_list': comment_list,
     })
