@@ -12,7 +12,7 @@ class PostListView(ListView):
     model = Post
     queryset = Post.objects.all().prefetch_related('tag_set', 'comments_set')
     paginate_by = 10
-    
+
 
 post_list = PostListView.as_view()
 
