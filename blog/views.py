@@ -1,10 +1,13 @@
 from django.contrib import messages
 from django.http import Http404
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.views.generic import ListView
 
-from .models import Post
 from .forms import PostForm
+from .models import Comments
+from .models import Post
 
 
 def post_list(request):
@@ -63,4 +66,11 @@ def post_edit(request, id):
         form = PostForm(instance=post)
     return render(request, 'blog/post_form.html', {
         'form': form,
+    })
+
+
+def comment_list(request):
+    comment_list = Comments.objects.all()
+    return render(request, 'blog/comment_list.html', {
+        'comment_list': comment_list,
     })
