@@ -17,8 +17,15 @@ from .models import Post, Comments, Tag
 # 등록법 3 : 장식자 형태로 지원
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'content_size', 'status', 'created_at', 'updated_at']
+    list_display = ['id', 'title', 'tag_list', 'content_size', 'status', 'created_at', 'updated_at']
     actions = ['make_draft', 'make_published']
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        return qs.prefetch_related('tag_set')
+
+    def tag_list(self, post):
+        return ', '.join(tag.name for tag in post.tag_set.all())    # list comprehension
 
     def content_size(self, post):
         return mark_safe('<strong>{}</strong>글자'.format(len(post.content)))
