@@ -44,11 +44,19 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.naver',
     'bootstrap3',
     'debug_toolbar',
     'django_extensions',
     'imagekit',
+    'raven.contrib.django.raven_compat',
     'accounts',
     'blog',
     'dojo',
@@ -118,6 +126,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',    # 기본 인증 Backend
+    'allauth.account.auth_backends.AuthenticationBackend',  # 추가
+]
+
+# 디폴트 SITE의 id
+# 등록하지 않으면, 각 요청 시에 host명의 Site 인스턴스를 찾음.
+SITE_ID = 1
+
+# 이메일 확인을 하지 않음.
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -152,3 +171,17 @@ MESSAGE_LEVEL = constants.DEBUG     # 지금부터 debug 레벨의 messages를 �
 MESSAGE_TAGS = {constants.ERROR: 'danger'}
 
 NAVER_CLIENT_ID = secrets['NAVER_CLIENT_ID']
+
+
+import raven
+
+GIT_ROOT = BASE_DIR
+if os.path.exists(os.path.join(GIT_ROOT, '.git')):
+    release = raven.fetch_git_sha(GIT_ROOT) # 최근 커밋해시 획득
+else:
+    release = 'dev'
+
+RAVEN_CONFIG = {
+    'dsn': "https://43209eba2bed4e9b8dde8aa131cd6aca@sentry.io/1292640",
+    'release': release,
+}

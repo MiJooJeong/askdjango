@@ -1,16 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" />
-    </form>
-</body>
-</html>
+{% extends "accounts/layout.html" %}
+{% load socialaccount %}
+
+{% block content %}
+    <div>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" />
+        </form>
+
+        <h3>Social Login</h3>
+
+        <ul>
+            {% for provider in providers %}
+                <li>
+                    {% if provider.social_app %}
+                        <a href="{% provider_login_url provider.id %}">
+                            {{ provider.name }}
+                        </a>
+                    {% else %}
+                        <a>
+                            Provider {{ provider.name }} 설정이 필요합니다.
+                        </a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

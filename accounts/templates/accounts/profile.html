@@ -4,10 +4,10 @@
     <h2>{{ user }}'s Profile</h2>
 
     <ul>
-        <li>email : {{ user.email }}</li>
         <li>username : {{ user.username }}</li>
-        <li>is_staff : {{ user.is_staff }}</li>
-        <li>is_superuser : {{ user.is_superuser }}</li>
-        <li>{{ user.date_joined }}</li>
+        <li>email : {{ user.email }}</li>
+        <li>data_joined : {{ user.date_joined }}</li>
     </ul>
+
+    <img src="{{ user.socialaccount_set.all.first.get_avatar_url }}"
 {% endblock %}
